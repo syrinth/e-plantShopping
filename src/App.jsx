@@ -12,6 +12,11 @@ function App() {
     setShowProductList(true);
   };
 
+   const handleBackToMain = (e) => {
+    e.preventDefault();
+    setShowProductList(false);
+  };
+
   return (
     <div className="app-container">
       <div className={`landing-page ${showProductList ? 'fade-out' : ''}`}>
@@ -33,7 +38,7 @@ function App() {
 
       </div>
       <div className={`product-list-container ${showProductList ? 'visible' : ''}`}>
-        <ProductList />
+        <ProductList onBackToMain={handleBackToMain}/>
       </div>
     </div>
   );

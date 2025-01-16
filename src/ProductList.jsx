@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './ProductList.css'
 import CartItem from './CartItem';
 import { addItem } from './CartSlice';
-function ProductList() {
+function ProductList({onBackToMain}) {
     const dispatch = useDispatch();
     const cart = useSelector(state => state.cart.items);
     const cartSize = useSelector(state => state.cart.size);
@@ -241,12 +241,12 @@ function ProductList() {
    const handleCartClick = (e) => {
     e.preventDefault();
     setShowCart(true); // Set showCart to true when cart icon is clicked
-};
-const handlePlantsClick = (e) => {
-    e.preventDefault();
-    setShowPlants(true); // Set showAboutUs to true when "About Us" link is clicked
-    setShowCart(false); // Hide the cart when navigating to About Us
-};
+    };
+    const handlePlantsClick = (e) => {
+        e.preventDefault();
+        setShowPlants(true); // Set showAboutUs to true when "About Us" link is clicked
+        setShowCart(false); // Hide the cart when navigating to About Us
+    };
 
    const handleContinueShopping = (e) => {
     e.preventDefault();
@@ -259,15 +259,19 @@ const handlePlantsClick = (e) => {
        ...prevState,
        [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
      }));
-
   };
+
+  const handleBackToMain = (e) => {
+    onBackToMain(e);
+  };
+
     return (
         <div>
             <div className="navbar" style={styleObj}>
             <div className="tag">
                <div className="luxury">
                <img src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png" alt="" />
-               <a href="/" style={{textDecoration:'none'}}>
+               <a href="#" onClick={(e)=>handleBackToMain(e)} style={{textDecoration:'none'}}>
                         <div>
                     <h3 style={{color:'white'}}>Paradise Nursery</h3>
                     <i style={{color:'white'}}>Where Green Meets Serenity</i>
