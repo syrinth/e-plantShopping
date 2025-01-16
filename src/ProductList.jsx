@@ -5,6 +5,7 @@ import CartItem from './CartItem';
 import { addItem } from './CartSlice';
 function ProductList() {
     const dispatch = useDispatch();
+    const cart = useSelector(state => state.cart.items);
     const cartSize = useSelector(state => state.cart.size);
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
@@ -300,7 +301,7 @@ const handlePlantsClick = (e) => {
                             <div className="product-title">{plant.name}</div>
                             <div className="product-cost">${plant.cost}</div>
                             <div className="product-description">{plant.description}</div>
-                            <button  className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
+                            <button  className={`product-button ${cart.find(item => item.name === plant.name) ? 'added-to-cart' : ''}`} onClick={() => handleAddToCart(plant)} disabled={cart.find(item => item.name === plant.name)}>Add to Cart</button>
                         </div>
                         ))}
                     </div>
